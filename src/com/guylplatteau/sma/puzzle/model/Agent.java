@@ -16,11 +16,25 @@ public class Agent extends Thread {
         this.currentPosition = position;
         this.destination = destination;
         grid.add(this);
-        neighbors = grid.getNeighbors(this);
+        //neighbors = grid.getNeighbors(this);
     }
 
     Agent(int x, int y, int destination_x, int destination_y){
         this(new Point(x,y), new Point(destination_x, destination_y));
+    }
+
+    public Point getPosition() {
+        return currentPosition;
+    }
+
+    public int getX()
+    {
+        return currentPosition.x;
+    }
+
+    public int getY()
+    {
+        return currentPosition.y;
     }
 
 }
