@@ -4,9 +4,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Observable;
 
-/**
- * Created by jonat on 12/12/2016.
- */
 public class Grid extends Observable {
 
     int width, height;
@@ -21,19 +18,20 @@ public class Grid extends Observable {
 
     public boolean updatePosition(Agent agent, Point desired)
     {
-        if(desired.x > 0 && desired.x < width &&
-                desired.y > 0 && desired.y < height &&
+        if(desired.x >= 0 && desired.x < width &&
+                desired.y >= 0 && desired.y < height &&
                 grid[desired.x][desired.y] == null)
         {
             grid[agent.getX()][agent.getY()] = null;
             grid[desired.x][desired.y] = agent;
+            this.setChanged();
             notifyObservers();
             return true;
         }
         return false;
     }
 
-    public void add(Agent agent)
+    void add(Agent agent)
     {
         updatePosition(agent, agent.getPosition());
     }
