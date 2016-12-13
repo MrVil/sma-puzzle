@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Observable;
 
-class Grid extends Observable {
+public class Grid extends Observable {
 
     int width, height;
     Agent[][] grid;
@@ -16,14 +16,15 @@ class Grid extends Observable {
         grid = new Agent[width][height];
     }
 
-    private boolean updatePosition(Agent agent, Point desired)
+    public boolean updatePosition(Agent agent, Point desired)
     {
-        if(desired.x > 0 && desired.x < width &&
-                desired.y > 0 && desired.y < height &&
+        if(desired.x >= 0 && desired.x < width &&
+                desired.y >= 0 && desired.y < height &&
                 grid[desired.x][desired.y] == null)
         {
             grid[agent.getX()][agent.getY()] = null;
             grid[desired.x][desired.y] = agent;
+            this.setChanged();
             notifyObservers();
             return true;
         }

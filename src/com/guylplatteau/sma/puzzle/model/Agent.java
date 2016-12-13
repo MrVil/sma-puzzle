@@ -11,6 +11,7 @@ public class Agent extends Thread {
 
     private Point currentPosition, destination;
     private List<Agent> neighbors;
+    private boolean running = true;
 
     private Agent(Point position, Point destination) {
         this.currentPosition = position;
@@ -22,6 +23,10 @@ public class Agent extends Thread {
 
     public Agent(int x, int y, int destination_x, int destination_y){
         this(new Point(x,y), new Point(destination_x, destination_y));
+    }
+
+    public static Grid getGrid() {
+        return grid;
     }
 
     Point getPosition() {
@@ -48,7 +53,13 @@ public class Agent extends Thread {
 
     @Override
     public void run(){
+        while (running){
+            if(grid.updatePosition(this, destination))
+                currentPosition = destination;
 
+            if(currentPosition.equals(destination))
+                running = false;
+        }
     }
 
 }
