@@ -51,11 +51,17 @@ public class Agent extends Thread {
         return destination;
     }
 
+    private synchronized void requestPosition()
+    {
+        Point goal = getDestination();
+        if(grid.updatePosition(this, goal))
+            currentPosition = goal;
+    }
+
     @Override
     public void run(){
         while (running){
-            if(grid.updatePosition(this, destination))
-                currentPosition = destination;
+            requestPosition();
 
             if(currentPosition.equals(destination))
                 running = false;

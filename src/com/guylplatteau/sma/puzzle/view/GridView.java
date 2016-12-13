@@ -14,6 +14,8 @@ public class GridView implements Observer {
         for(byte j = 0; j < grid.getHeight(); ++j){
             for(byte i = 0; i < grid.getWidth()*2 +2; ++i)
                 System.out.print("-");
+            System.out.println();
+
             System.out.print("|");
             for(byte i = 0; i < grid.getWidth(); ++i)
             {
@@ -29,6 +31,8 @@ public class GridView implements Observer {
         }
         for(byte i = 0; i < grid.getWidth()*2 +2; ++i)
             System.out.print("-");
+        System.out.println();
+        System.out.println();
 
     }
 }
