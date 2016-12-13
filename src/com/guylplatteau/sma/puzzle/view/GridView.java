@@ -14,15 +14,23 @@ public class GridView implements Observer {
     public void update(Observable o, Object arg) {
         Grid grid = (Grid) o;
         for(byte j = 0; j < grid.getHeight(); ++j){
+            for(byte i = 0; i < grid.getWidth()*2 +2; ++i)
+                System.out.print("-");
+            System.out.print("|");
             for(byte i = 0; i < grid.getWidth(); ++i)
             {
                 if(grid.getPosition(i,j) == null)
-                    System.out.println(" ");
+                    System.out.print(" ");
                 else
-                    System.out.println("X");
+                    System.out.print("X");
+
+                System.out.print("|");
+
             }
             System.out.println();
         }
+        for(byte i = 0; i < grid.getWidth()*2 +2; ++i)
+            System.out.print("-");
 
     }
 }
