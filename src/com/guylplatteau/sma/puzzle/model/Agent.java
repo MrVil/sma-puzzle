@@ -12,29 +12,43 @@ public class Agent extends Thread {
     private Point currentPosition, destination;
     private List<Agent> neighbors;
 
-    Agent(Point position, Point destination) {
+    private Agent(Point position, Point destination) {
         this.currentPosition = position;
         this.destination = destination;
+
         grid.add(this);
         //neighbors = grid.getNeighbors(this);
     }
 
-    Agent(int x, int y, int destination_x, int destination_y){
+    public Agent(int x, int y, int destination_x, int destination_y){
         this(new Point(x,y), new Point(destination_x, destination_y));
     }
 
-    public Point getPosition() {
+    Point getPosition() {
         return currentPosition;
     }
 
-    public int getX()
+    int getX()
     {
         return currentPosition.x;
     }
 
-    public int getY()
+    int getY()
     {
         return currentPosition.y;
+    }
+
+    public Point getCurrentPosition() {
+        return currentPosition;
+    }
+
+    public Point getDestination() {
+        return destination;
+    }
+
+    @Override
+    public void run(){
+
     }
 
 }
