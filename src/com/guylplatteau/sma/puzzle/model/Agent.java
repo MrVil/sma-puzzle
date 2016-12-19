@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Agent extends Thread {
 
     private static final int GRID_WIDTH = 5, GRID_HEIGHT = 5;
@@ -53,16 +52,32 @@ public class Agent extends Thread {
         return destination;
     }
 
+    private Point getNextMove(){
+        double minDist = Integer.MAX_VALUE;
+        Point nextMove = new Point(currentPosition);
+        for(byte i = -1 ; i < 2; i++)
+            for(byte j = -1; j < 2; j++){
+                double dist = destination.distance(currentPosition.x + i, currentPosition.y + j);
+                if(dist < minDist){
+                    minDist = dist;
+                    nextMove = new Point(currentPosition.x + i, currentPosition.y +j);
+                }
+            }
+        return nextMove;
+    }
+
     private void updatePosition()
     {
-        Point goal = getDestination();
+        Point goal = getNextMove();
         if(grid.requestPosition(this, goal))
             currentPosition = goal;
+        else
+            MessageManager.send(new Message(this,grid.getPosition(goal), Perform.REQUEST, Action.FREE));
     }
 
     @Override
     public void run(){
-        while (running){it
+        while (running){
             updatePosition();
 
             if(currentPosition.equals(destination))
@@ -71,9 +86,13 @@ public class Agent extends Thread {
     }
 
     public void messageHandler(Message message){
-        switch (message.perform){
-            case Perform.REQUEST: break;
+        switch (message.getAction()){
+            case FREE: onFree(); break;
         }
+
+    }
+
+    private void onFree() {
 
     }
 

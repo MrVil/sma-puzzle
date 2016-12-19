@@ -38,6 +38,7 @@ enum Perform {
     RESPONSE
 }
 enum Action {
+    FREE,
     MOVE,
     GTFO,
     OK
