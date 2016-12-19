@@ -12,16 +12,22 @@ public class MessageManager {
         messages = new ArrayList<>();
     }
 
-    public ArrayList<Message> getMessages(Agent agent) {
+    public synchronized ArrayList<Message> getMessages(Agent agent) {
         ArrayList<Message> result = new ArrayList<>();
         for (Message message: messages) {
             if(message.getReceiver().equals(agent)) {
                 result.add(message);
-                messages.remove(message);
             }
+        }
+        for (Message message: result)
+        {
+            messages.remove(message);
         }
         return result;
     }
 
-    public void send(Agent james, Agent )
+    public synchronized void send(Message m) {
+        messages.add(m);
+        //System.out.println(m.getEmmiter() + ">" + m.getEmmiter() + ":" + m.getPerform() + " " + m.getAction());
+    }
 }

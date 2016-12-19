@@ -8,7 +8,7 @@ public class Agent extends Thread {
 
     private static final int GRID_WIDTH = 5, GRID_HEIGHT = 5;
     private static Grid grid = new Grid(GRID_WIDTH, GRID_HEIGHT);
-    private static ArrayList<Message> messages = new ArrayList<>();
+    private static MessageManager manager = new MessageManager();
 
     private Point currentPosition, destination;
     private List<Agent> neighbors;
@@ -72,12 +72,14 @@ public class Agent extends Thread {
         if(grid.requestPosition(this, goal))
             currentPosition = goal;
         else
-            MessageManager.send(new Message(this,grid.getPosition(goal), Perform.REQUEST, Action.FREE));
+            manager.send(new Message(this,grid.getPosition(goal), Perform.REQUEST, Action.FREE));
     }
 
     @Override
     public void run(){
         while (running){
+            ArrayList<Message> complains = manager.getMessages(this);
+
             updatePosition();
 
             if(currentPosition.equals(destination))
