@@ -68,4 +68,11 @@ public class Agent extends Thread {
         }
     }
 
+    public void messageHandler(Message message){
+        switch (message.perform){
+            case Perform.REQUEST: break;
+        }
+
+    }
+
 }
