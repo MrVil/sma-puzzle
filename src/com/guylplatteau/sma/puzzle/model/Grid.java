@@ -16,7 +16,7 @@ public class Grid extends Observable {
         grid = new Agent[width][height];
     }
 
-    public boolean updatePosition(Agent agent, Point desired)
+    public synchronized boolean requestPosition(Agent agent, Point desired)
     {
         if(desired.x >= 0 && desired.x < width &&
                 desired.y >= 0 && desired.y < height &&
@@ -33,7 +33,7 @@ public class Grid extends Observable {
 
     void add(Agent agent)
     {
-        updatePosition(agent, agent.getPosition());
+        requestPosition(agent, agent.getPosition());
     }
 
     public Agent getPosition(int x, int y)
