@@ -36,6 +36,11 @@ public class Grid extends Observable {
         requestPosition(agent, agent.getPosition());
     }
 
+    public Agent getPosition(Point position)
+    {
+        return getPosition(position.x, position.y);
+    }
+
     public Agent getPosition(int x, int y)
     {
         return grid[x][y];
