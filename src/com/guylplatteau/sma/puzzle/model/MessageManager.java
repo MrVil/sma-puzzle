@@ -22,4 +22,6 @@ public class MessageManager {
         }
         return result;
     }
+
+    public void send(Agent james, Agent )
 }

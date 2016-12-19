@@ -62,7 +62,7 @@ public class Agent extends Thread {
 
     @Override
     public void run(){
-        while (running){it
+        while (running){
             updatePosition();
 
             if(currentPosition.equals(destination))
