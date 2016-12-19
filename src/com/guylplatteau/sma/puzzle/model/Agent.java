@@ -1,6 +1,7 @@
 package com.guylplatteau.sma.puzzle.model;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -8,6 +9,7 @@ public class Agent extends Thread {
 
     private static final int GRID_WIDTH = 5, GRID_HEIGHT = 5;
     private static Grid grid = new Grid(GRID_WIDTH, GRID_HEIGHT);
+    private static ArrayList<Message> messages = new ArrayList<>();
 
     private Point currentPosition, destination;
     private List<Agent> neighbors;
@@ -60,7 +62,7 @@ public class Agent extends Thread {
 
     @Override
     public void run(){
-        while (running){
+        while (running){it
             updatePosition();
 
             if(currentPosition.equals(destination))
