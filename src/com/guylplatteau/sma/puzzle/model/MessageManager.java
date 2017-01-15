@@ -5,14 +5,14 @@ import java.util.ArrayList;
 /**
  * Created by jonat on 19/12/2016.
  */
-public class MessageManager {
+class MessageManager {
     private ArrayList<Message> messages;
 
     MessageManager() {
         messages = new ArrayList<>();
     }
 
-    public synchronized ArrayList<Message> getMessages(Agent agent) {
+    synchronized ArrayList<Message> getMessages(Agent agent) {
         ArrayList<Message> result = new ArrayList<>();
         for (Message message: messages) {
             if(message.getReceiver().equals(agent)) {
@@ -26,8 +26,7 @@ public class MessageManager {
         return result;
     }
 
-    public synchronized void send(Message m) {
+    synchronized void send(Message m) {
         messages.add(m);
-        //System.out.println(m.getEmmiter() + ">" + m.getEmmiter() + ":" + m.getPerform() + " " + m.getAction());
     }
 }

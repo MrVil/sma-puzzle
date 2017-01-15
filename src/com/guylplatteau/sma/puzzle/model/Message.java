@@ -16,7 +16,7 @@ public class Message {
         this.action = a;
     }
 
-    public Agent getReceiver() {
+    Agent getReceiver() {
         return receiver;
     }
 
@@ -24,7 +24,7 @@ public class Message {
         return perform;
     }
 
-    public Action getAction() {
+    Action getAction() {
         return action;
     }
 

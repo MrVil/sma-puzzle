@@ -6,8 +6,8 @@ import java.util.Observable;
 
 public class Grid extends Observable {
 
-    int width, height;
-    Agent[][] grid;
+    private int width, height;
+    private Agent[][] grid;
 
     Grid(int width, int height)
     {
@@ -16,7 +16,7 @@ public class Grid extends Observable {
         grid = new Agent[width][height];
     }
 
-    public synchronized boolean requestPosition(Agent agent, Point desired)
+    synchronized boolean requestPosition(Agent agent, Point desired)
     {
         if(desired.x >= 0 && desired.x < width &&
                 desired.y >= 0 && desired.y < height &&
@@ -36,7 +36,7 @@ public class Grid extends Observable {
         requestPosition(agent, agent.getPosition());
     }
 
-    public Agent getPosition(Point position)
+    Agent getPosition(Point position)
     {
         return getPosition(position.x, position.y);
     }
