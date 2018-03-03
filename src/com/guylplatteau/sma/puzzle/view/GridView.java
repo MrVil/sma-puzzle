@@ -22,7 +22,7 @@ public class GridView implements Observer {
                 if(grid.getPosition(i,j) == null)
                     System.out.print(" ");
                 else
-                    System.out.print("X");
+                    System.out.print(grid.getPosition(i,j).display);
 
                 System.out.print("|");
 

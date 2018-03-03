@@ -1,16 +1,18 @@
 package com.guylplatteau.sma.puzzle.model;
 
+import com.sun.istack.internal.NotNull;
+
 /**
  * Created by jonat on 19/12/2016.
  */
 public class Message {
-    private Agent emmiter;
+    private Agent emitter;
     private Agent receiver;
     private Perform perform;
     private Action action;
 
-    Message(Agent emmiter, Agent receiver, Perform p, Action a) {
-        this.emmiter = emmiter;
+    Message(Agent emitter, @NotNull Agent receiver, Perform p, Action a) {
+        this.emitter = emitter;
         this.receiver = receiver;
         this.perform = p;
         this.action = a;
@@ -28,8 +30,8 @@ public class Message {
         return action;
     }
 
-    public Agent getEmmiter() {
-        return emmiter;
+    public Agent getEmitter() {
+        return emitter;
     }
 }
 
@@ -39,7 +41,5 @@ enum Perform {
 }
 enum Action {
     FREE,
-    MOVE,
-    GTFO,
     OK
 }

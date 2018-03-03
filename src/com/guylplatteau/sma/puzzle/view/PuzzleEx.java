@@ -115,7 +115,6 @@ public class PuzzleEx extends JFrame {
     }
 
     private BufferedImage loadImage() throws IOException {
-
         return ImageIO.read(new File("icesid.jpg"));
     }
 

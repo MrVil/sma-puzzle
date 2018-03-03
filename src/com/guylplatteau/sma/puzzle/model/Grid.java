@@ -8,6 +8,7 @@ public class Grid extends Observable {
 
     private int width, height;
     private Agent[][] grid;
+    private boolean finished = false;
 
     Grid(int width, int height)
     {
@@ -25,9 +26,23 @@ public class Grid extends Observable {
             grid[agent.getX()][agent.getY()] = null;
             grid[desired.x][desired.y] = agent;
             this.setChanged();
+
             notifyObservers();
             return true;
         }
+        if(desired.x < 0){
+            System.out.println("Out of range - x negative");
+        }
+        if(desired.y < 0){
+            System.out.println("Out of range - y negative");
+        }
+        if(desired.x >= width){
+            System.out.println("Out of range - x >= width");
+        }
+        if(desired.y >= height){
+            System.out.println("Out of range - x >= height");
+        }
+        //System.out.println("Desired {"+desired.x+","+desired.y+"}, agent("+agent.getPosition().x+","+agent.getPosition().y+")");
         return false;
     }
 
@@ -53,4 +68,23 @@ public class Grid extends Observable {
     public int getHeight() {
         return height;
     }
+
+    synchronized public boolean isFinished() {
+        if(finished)
+            return true;
+
+        finished = true;
+        for (int i = 0; i < width; i++){
+            for (int j = 0; j < height; j++){
+                if(grid[i][j] != null){
+                    if(grid[i][j].getPosition().equals(grid[i][j].getDestination())){
+                        //System.out.println("{"+i+","+j+"}-"+grid[i][j].display);
+                    }
+                    finished = finished && grid[i][j].getPosition().equals(grid[i][j].getDestination());
+                }
+            }
+        }
+        return finished;
+    }
+
 }

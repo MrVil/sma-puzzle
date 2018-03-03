@@ -1,5 +1,7 @@
 package com.guylplatteau.sma.puzzle.model;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.ArrayList;
 
 /**
@@ -12,11 +14,20 @@ class MessageManager {
         messages = new ArrayList<>();
     }
 
-    synchronized ArrayList<Message> getMessages(Agent agent) {
+    synchronized ArrayList<Message> getMessages(@NotNull Agent agent) {
         ArrayList<Message> result = new ArrayList<>();
+
+        if(messages.isEmpty() || messages == null)
+            return new ArrayList<>();
+
         for (Message message: messages) {
-            if(message.getReceiver().equals(agent)) {
-                result.add(message);
+            try{
+                if(message.getReceiver().equals(agent) && !message.getEmitter().equals(agent)) {
+                    result.add(message);
+                }
+            }
+            catch(Exception e){
+
             }
         }
         for (Message message: result)
